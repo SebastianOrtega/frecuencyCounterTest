@@ -31,12 +31,20 @@ const flowCount = (flow) => {
           const t2 = mediaVariable[n + 1];
           const dt = t2 - t1;
           const f = 1000 / dt;
+          const q = f / 5.5;
+          flow.volume += (q / 60000) * dt;
+
           console.log(
-            `t2=${t2}\t t1=${t1}\t Δt=${dt}\t f=${f}\tQ=$${0}\tcount=${n}`
+            `t2=${t2}\t t1=${t1}\t Δt=${dt}\t f=${f}\tQ=$${q}\tVol=${flow.volume}\tcount=${n}`
           );
         }
 
         clearInterval(flow.time);
+        console.log(
+          `Tini=${mediaVariable[0]}\t Tfin=${mediaVariable[98]}\t Δt=${
+            mediaVariable[98] - mediaVariable[0]
+          }\t `
+        );
       }
     }
   }, 16);
